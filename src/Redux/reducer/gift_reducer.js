@@ -8,6 +8,14 @@ export const Gift_reducer = (state = store, action) => {
                 temp.allGifts = action.payload.data.data
             }
             break;
+        // case 'deleteGift':
+        //     temp.deletedGift = true
+        //     break;
+        case 'getPresentedGifts':
+            if (action.payload.status) {
+                temp.presentedGifts = action.payload.data.data
+            }
+            break;
         default:
             return temp;
     }
