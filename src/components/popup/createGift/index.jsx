@@ -16,20 +16,20 @@ const CreateGift = ({ open, setOpen, setNewGift }) => {
             event.preventDefault()
             event.stopPropagation()
         } else {
-            const myHeaders = new Headers();
-            myHeaders.append("Authorization", `Bearer ${token}`);
+            const myHeaders = new Headers()
+            myHeaders.append("Authorization", `Bearer ${token}`)
 
-            let formdata = new FormData();
-            formdata.append("photo", photo);
-            formdata.append("name", name);
-            formdata.append("price", price);
+            let formdata = new FormData()
+            formdata.append("photo", photo)
+            formdata.append("name", name)
+            formdata.append("price", price)
 
             const requestOptions = {
                 method: 'POST',
                 headers: myHeaders,
                 body: formdata,
                 redirect: 'follow'
-            };
+            }
             fetch(`${process.env.REACT_APP_HOSTNAME}/admin/create_new_gift`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
@@ -41,8 +41,7 @@ const CreateGift = ({ open, setOpen, setNewGift }) => {
                         setOpen(false)
                     }
                 })
-                .catch(error => console.log('error', error));
-
+                .catch(error => console.log('error', error))
         }
         setValidated(true)
     }

@@ -2,11 +2,13 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilBell,
+  cilBriefcase,
   cilCalculator,
   cilChartPie,
   cilCursor,
   cilDescription,
   cilDrop,
+  cilGroup,
   cilNotes,
   cilPencil,
   cilPuzzle,
@@ -31,13 +33,15 @@ const _nav = [
     component: CNavItem,
     name: 'Модераторы',
     to: '/base/moderators',
-    icon: <Moderators />
+    // icon: <Moderators />
+    icon: <CIcon icon={cilBriefcase} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Пользователи',
     to: '/base/users',
-    icon: <Moderators />
+    // icon: <Moderators />
+    icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
@@ -48,14 +52,30 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Все подарки',
-        // to: '/base/accordion',
         to: '/base/allGifts',
       },
       {
         component: CNavItem,
         name: 'Посвященные подарки',
-        // to: '/base/breadcrumbs',
         to: '/base/presentedGifts',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Форумы',
+    to: '/base',
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Категории форумов',
+        to: '/base/forumCategories',
+      },
+      {
+        component: CNavItem,
+        name: 'Все форумы',
+        to: '/base/allForums',
       },
     ],
   },

@@ -3,11 +3,12 @@ import EditGift from '../popup/editGift'
 import CreateGift from '../popup/createGift'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { DeleteGift, GetAllGifts } from 'src/Redux/action/gift_action'
+import { GetAllGifts } from 'src/Redux/action/gift_action'
 import { CButton, CCard, CCardBody, CCardImage, CCardText } from '@coreui/react'
 
 const AllGifts = () => {
     const dispatch = useDispatch()
+    const token = localStorage.getItem('token')
     const allGifts = useSelector(st => st.Gift_reducer.allGifts)
     const [openGift, setOpenGift] = useState(false)
     const [openEditGift, setOpenEditGift] = useState(false)
@@ -19,7 +20,22 @@ const AllGifts = () => {
     }, [newGift])
 
     function deletePhoto(id) {
-        dispatch(DeleteGift(id))
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+        var formdata = new FormData();
+        formdata.append("gift_id", id);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://socnetworkbackend.justcode.am/api/admin/delete_gift?gift_id", requestOptions)
+            .then(response => response.json())
+            .then(result => result.status && setNewGift(new Date()))
+            .catch(error => console.log('error', error));
     }
 
     return (

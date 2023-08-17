@@ -55,6 +55,9 @@ const SingleModerator = React.lazy(() => import('./components/singleModerator/in
 const SingleUser = React.lazy(() => import('./components/singleUser/index'))
 const AllGifts = React.lazy(() => import('./components/allGifts/index'))
 const PresentedGifts = React.lazy(() => import('./components/presentedGifts/index'))
+const ForumCategories = React.lazy(() => import('./components/forumCategories/index'))
+const AllForums = React.lazy(() => import('./components/allForums/index'))
+const SingleForumCategory = React.lazy(() => import('./components/singleForumCategory/index'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -100,11 +103,14 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', element: Modals },
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
   { path: '/widgets', name: 'Widgets', element: Widgets },
-  
+
   { path: '/moderator/:id', name: 'Single Moderator', element: SingleModerator, exact: true },
   { path: '/user/:id', name: 'Single User', element: SingleUser, exact: true },
   { path: '/base/allGifts', name: 'All Gifts', element: AllGifts },
   { path: '/base/presentedGifts', name: 'Presented Gifts', element: PresentedGifts },
+  { path: '/base/forumCategories', name: 'Forum Categories', element: ForumCategories },
+  { path: '/base/allForums', name: 'All Forums', element: AllForums },
+  { path: '/forumCategory/:id', name: 'All Forums', element: SingleForumCategory },
 ]
 
 export default routes
