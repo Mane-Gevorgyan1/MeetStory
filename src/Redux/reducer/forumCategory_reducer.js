@@ -21,6 +21,11 @@ export const ForumCategory_reducer = (state = store, action) => {
                 temp.allForums = action.payload.data.data
             }
             break;
+        case 'getSingleForum':
+            if (action.payload.status) {
+                temp.singleForum = action.payload.data
+            }
+            break;
         default:
             return temp;
     }

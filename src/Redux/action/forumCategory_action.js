@@ -4,3 +4,4 @@ export const GetForumCategories = (search) => { return FetchPost('/admin/get_for
 export const GetSingleForumCategories = (category_id) => { return FetchPost(`/admin/single_page_forum_category`, { category_id }, 'getSingleForumCategories') }
 export const DeleteForumCategory = (category_id) => { return FetchPost('/admin/delete_forum_category', { category_id }, 'deleteForumCategory') }
 export const GetForums = () => { return FetchGet('/admin/get_forums', 'getForums') }
+export const GetSingleForum = (forum_id) => { return FetchPost('/admin/single_page_forum', {forum_id}, 'getSingleForum') }

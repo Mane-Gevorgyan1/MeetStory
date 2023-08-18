@@ -58,6 +58,7 @@ const PresentedGifts = React.lazy(() => import('./components/presentedGifts/inde
 const ForumCategories = React.lazy(() => import('./components/forumCategories/index'))
 const AllForums = React.lazy(() => import('./components/allForums/index'))
 const SingleForumCategory = React.lazy(() => import('./components/singleForumCategory/index'))
+const SingleForum = React.lazy(() => import('./components/singleForum/index'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -111,6 +112,7 @@ const routes = [
   { path: '/base/forumCategories', name: 'Forum Categories', element: ForumCategories },
   { path: '/base/allForums', name: 'All Forums', element: AllForums },
   { path: '/forumCategory/:id', name: 'All Forums', element: SingleForumCategory },
+  { path: '/forum/:id', name: 'Single Forum', element: SingleForum },
 ]
 
 export default routes

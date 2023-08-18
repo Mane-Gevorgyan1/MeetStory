@@ -11,8 +11,7 @@ const CreateForum = ({ open, setOpen, setNewForum }) => {
     const categories = useSelector(st => st.ForumCategory_reducer.allForumCategories)
     const [validated, setValidated] = useState(false)
     const [description, setDescription] = useState('')
-    const [photo, setPhoto] = useState()
-    const [categoryId, setCategoryId] = useState('')
+    const [categoryId, setCategoryId] = useState()
     var formdata = new FormData();
 
     useEffect(() => {
@@ -28,9 +27,8 @@ const CreateForum = ({ open, setOpen, setNewForum }) => {
             var myHeaders = new Headers();
             myHeaders.append("Authorization", `Bearer ${token}`);
 
-            formdata.append("category_id", 3);
+            formdata.append("category_id", categoryId);
             formdata.append("description", description);
-            // formdata.append("photo[]", photo);   
 
             var requestOptions = {
                 method: 'POST',
@@ -41,7 +39,13 @@ const CreateForum = ({ open, setOpen, setNewForum }) => {
 
             fetch("https://socnetworkbackend.justcode.am/api/admin/create_forum", requestOptions)
                 .then(response => response.json())
-                .then(result => console.log(result))
+                .then(result => {
+                    if(result.status) {
+                        setNewForum(new Date())
+                        setDescription('')
+                        // setCategoryId('')
+                    }
+                })
                 .catch(error => console.log('error', error));
         }
         setValidated(true)

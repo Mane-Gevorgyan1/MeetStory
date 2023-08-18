@@ -10,6 +10,7 @@ const AllForums = () => {
     const forums = useSelector(st => st.ForumCategory_reducer.allForums)
     const [openCreate, setOpenCreate] = useState(false)
     const [newForum, setNewForum] = useState(new Date())
+    console.log(forums)
 
     useEffect(() => {
         getForums()
@@ -36,10 +37,19 @@ const AllForums = () => {
         <div className="forumCategories">
             {forums.length
                 ? forums.map((e, i) => (
-                    <div className="eachForum" style={{ background: e?.color }} key={i} onClick={() => window.location = `/#/forumCategory/${e?.id}`}>
-                        <img alt='' src={`${process.env.REACT_APP_IMAGE}/${e?.icon}`} />
-                        <span>{e?.name}</span>
-                        <span>Приватность: {e?.open_or_close}</span>
+                    <div key={i} className='eachForum' onClick={() => window.location = `/#/forum/${e?.id}`}>
+                        <div className='eachForumUser'>
+                            <img alt='' src={`${process.env.REACT_APP_IMAGE}/${e?.user?.avatar}`} />
+                            <span>{e?.user?.name} {e?.user?.surname}</span>
+                        </div>
+                        <div className='eachForumImages'>
+                            {e?.photo?.map((e, i) => (
+                                <img alt='' src={`${process.env.REACT_APP_IMAGE}/${e?.photo}`} key={i} />
+                            ))}
+                        </div>
+                        <div className='eachForumDescription'>
+                            <p>{e?.description}</p>
+                        </div>
                     </div>
                 ))
                 : <span>Нет форумов</span>

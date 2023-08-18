@@ -1,5 +1,6 @@
 export default {
     allForumCategories: [],
     singleForumCategory: {},
-    allForums: []
+    allForums: [],
+    singleForum: {}
 }

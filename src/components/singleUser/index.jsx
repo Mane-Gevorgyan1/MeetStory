@@ -131,7 +131,6 @@ const SingleUser = () => {
                 .then(response => response.json())
                 .then(result => {
                     if (result.status) {
-                        // alert('Сведения о пользователе обновлены')
                         window.location = '/#/base/users'
                     }
                 })
