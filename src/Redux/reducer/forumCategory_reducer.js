@@ -11,6 +11,16 @@ export const ForumCategory_reducer = (state = store, action) => {
         case 'getSingleForumCategories':
             temp.singleForumCategory = action.payload.data
             break;
+        case 'deleteForumCategory':
+            if (action.payload.status) {
+                window.location = '/base/forumCategories#/base/forumCategories'
+            }
+            break;
+        case 'getForums':
+            if (action.payload.status) {
+                temp.allForums = action.payload.data.data
+            }
+            break;
         default:
             return temp;
     }

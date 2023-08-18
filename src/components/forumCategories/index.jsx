@@ -28,7 +28,7 @@ const ForumCategories = () => {
             />
         }
         <div className='categoriesTop'>
-            <CFormInput placeholder="Search here" onChange={(e) => getCategories(e.target.value)} style={{ width: '300px', marginBottom: '20px' }} />
+            <CFormInput placeholder="Поиск" onChange={(e) => getCategories(e.target.value)} style={{ width: '300px', marginBottom: '20px' }} />
             <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
                 <CButton color="primary" className="me-md-2" onClick={() => setOpenCreate(true)}>Создать категорию</CButton>
             </div>

@@ -1,15 +1,15 @@
 import './style.css'
+import { useState } from 'react'
 import { CloseIcon } from 'src/assets/svg'
 import { CButton, CCol, CForm, CFormInput, CFormSelect } from '@coreui/react'
-import { useState } from 'react'
 
-const CreateForumCategory = ({ open, setOpen, setNewCategory }) => {
+const EditForumCategory = ({ open, setOpen, category, setUpdate }) => {
     const token = localStorage.getItem('token')
     const [validated, setValidated] = useState(false)
-    const [name, setName] = useState('')
+    const [name, setName] = useState(category?.name)
     const [icon, setIcon] = useState()
-    const [privacy, setPrivacy] = useState('Открытый')
-    const [color, setColor] = useState('#32709F')
+    const [privacy, setPrivacy] = useState(category?.open_or_close)
+    const [color, setColor] = useState(category?.color)
 
     const handleSubmit = (event) => {
         const form = event.currentTarget
@@ -21,10 +21,13 @@ const CreateForumCategory = ({ open, setOpen, setNewCategory }) => {
             myHeaders.append("Authorization", `Bearer ${token}`);
 
             const formdata = new FormData();
+            formdata.append("category_id", category?.id);
             formdata.append("name", name);
             formdata.append("color", color);
             formdata.append("open_or_close", privacy);
-            formdata.append("icon", icon);
+            if (icon) {
+                formdata.append("icon", icon);
+            }
 
             const requestOptions = {
                 method: 'POST',
@@ -33,15 +36,11 @@ const CreateForumCategory = ({ open, setOpen, setNewCategory }) => {
                 redirect: 'follow'
             };
 
-            fetch("https://socnetworkbackend.justcode.am/api/admin/create_forum_category", requestOptions)
+            fetch("https://socnetworkbackend.justcode.am/api/admin/update_forum_category", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status) {
-                        setNewCategory(new Date)
-                        setName('')
-                        setIcon('')
-                        setPrivacy('Открытый')
-                        setColor('#32709F')
+                        setUpdate(new Date())
                         close()
                     }
                 })
@@ -72,19 +71,18 @@ const CreateForumCategory = ({ open, setOpen, setNewCategory }) => {
                 >
                     <CFormInput
                         type="text"
-                        label="Выберите имя"
+                        label="Имя"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
                     <CFormInput
                         type="file"
-                        label="Выбрать Значок"
+                        label="Значок"
                         onChange={handleImageChange}
-                        required
                     />
                     <CFormSelect
-                        label="Выберите приватность"
+                        label="Приватность"
                         options={[
                             { label: 'Открытый', value: 'Открытый' },
                             { label: 'Закрытый', value: 'Закрытый' },
@@ -95,14 +93,14 @@ const CreateForumCategory = ({ open, setOpen, setNewCategory }) => {
                     />
                     <CFormInput
                         type="color"
-                        label="Выберите цвет фона"
+                        label="Цвет фона"
                         value={color}
                         onChange={(e) => setColor(e.target.value)}
                         required
                     />
                     <CCol xs={12} className="position-relative">
                         <CButton color="primary" type="submit">
-                            Создать
+                            Сохранить
                         </CButton>
                     </CCol>
                 </CForm>
@@ -111,4 +109,4 @@ const CreateForumCategory = ({ open, setOpen, setNewCategory }) => {
     )
 }
 
-export default CreateForumCategory
+export default EditForumCategory

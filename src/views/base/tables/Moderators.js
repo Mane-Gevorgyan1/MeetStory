@@ -46,7 +46,7 @@ const Moderators = () => {
     <>
       <CForm className="row g-3">
         <CCol xs="auto">
-          <CFormInput id="inputPassword2" placeholder="Search here" onChange={(e) => getModerators(e.target.value)} />
+          <CFormInput id="inputPassword2" placeholder="Поиск" onChange={(e) => getModerators(e.target.value)} />
         </CCol>
       </CForm>
       <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>

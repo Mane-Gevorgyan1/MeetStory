@@ -33,7 +33,7 @@ const Users = () => {
     <>
       <CForm className="row g-3" style={{ marginBottom: '20px' }}>
         <CCol xs="auto">
-          <CFormInput id="inputPassword2" placeholder="Search here" onChange={(e) => getUsers(e.target.value)}
+          <CFormInput id="inputPassword2" placeholder="Поиск" onChange={(e) => getUsers(e.target.value)}
           />
         </CCol>
       </CForm>
