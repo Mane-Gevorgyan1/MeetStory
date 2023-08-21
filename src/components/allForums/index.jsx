@@ -10,7 +10,6 @@ const AllForums = () => {
     const forums = useSelector(st => st.ForumCategory_reducer.allForums)
     const [openCreate, setOpenCreate] = useState(false)
     const [newForum, setNewForum] = useState(new Date())
-    console.log(forums)
 
     useEffect(() => {
         getForums()
@@ -28,11 +27,8 @@ const AllForums = () => {
                 setNewForum={setNewForum}
             />
         }
-        <div className='categoriesTop'>
-            <CFormInput placeholder="Поиск" onChange={(e) => getCategories(e.target.value)} style={{ width: '300px', marginBottom: '20px' }} />
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
-                <CButton color="primary" className="me-md-2" onClick={() => setOpenCreate(true)}>Создать форум</CButton>
-            </div>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
+            <CButton color="primary" className="me-md-2" onClick={() => setOpenCreate(true)}>Создать форум</CButton>
         </div>
         <div className="forumCategories">
             {forums.length

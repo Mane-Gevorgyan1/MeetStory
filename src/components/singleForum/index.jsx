@@ -1,13 +1,14 @@
 import './style.css'
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { GetForums, GetSingleForum } from "src/Redux/action/forumCategory_action"
+import { DeleteForum, GetForums, GetSingleForum } from "src/Redux/action/forumCategory_action"
 import { CButton, CFormInput } from '@coreui/react'
 import CreateForum from '../popup/createForum'
 
 const SingleForum = () => {
     const dispatch = useDispatch()
     const href = window.location.href.split('/')
+    const forumId = href[href.length - 1]
     const forum = useSelector(st => st.ForumCategory_reducer.singleForum)
     const [newForum, setNewForum] = useState(new Date())
 
@@ -16,16 +17,18 @@ const SingleForum = () => {
     }, [newForum])
 
     function getForum() {
-        dispatch(GetSingleForum(href[href.length - 1]))
+        dispatch(GetSingleForum(forumId))
+    }
+
+    function deleteForum() {
+        const agree = confirm('Вы уверены, что хотите удалить этот форум?')
+        agree && dispatch(DeleteForum(forumId))
     }
 
     return (<>
-        <div className='categoriesTop'>
-            <CFormInput placeholder="Поиск" onChange={(e) => getCategories(e.target.value)} style={{ width: '300px', marginBottom: '20px' }} />
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
-                <CButton color="warning" className="me-md-2">Редактировать</CButton>
-                <CButton color="danger" className="me-md-2">Удалить</CButton>
-            </div>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{ marginBottom: '10px' }}>
+            <CButton color="warning" className="me-md-2">Редактировать</CButton>
+            <CButton color="danger" className="me-md-2" onClick={deleteForum}>Удалить</CButton>
         </div>
         <div className="forumCategories">
             <div className='eachForum'>

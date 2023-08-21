@@ -26,6 +26,12 @@ export const ForumCategory_reducer = (state = store, action) => {
                 temp.singleForum = action.payload.data
             }
             break;
+        case 'deleteForum':
+            console.log(action.payload);
+            if (action.payload.status) {
+                window.location = '/base/allForums#/base/allForums'
+            }
+            break;
         default:
             return temp;
     }

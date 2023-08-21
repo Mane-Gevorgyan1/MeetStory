@@ -6,17 +6,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetForumCategories } from 'src/Redux/action/forumCategory_action'
 
 const CreateForum = ({ open, setOpen, setNewForum }) => {
-    const token = localStorage.getItem('token')
     const dispatch = useDispatch()
+    const token = localStorage.getItem('token')
     const categories = useSelector(st => st.ForumCategory_reducer.allForumCategories)
     const [validated, setValidated] = useState(false)
     const [description, setDescription] = useState('')
-    const [categoryId, setCategoryId] = useState()
+    const [categoryId, setCategoryId] = useState(categories[0]?.id)
     var formdata = new FormData();
 
     useEffect(() => {
         dispatch(GetForumCategories())
     }, [])
+
+    useEffect(() => {
+        categories && setCategoryId(categories[0]?.id)
+    }, [categories])
 
     const handleSubmit = (event) => {
         const form = event.currentTarget
@@ -40,10 +44,9 @@ const CreateForum = ({ open, setOpen, setNewForum }) => {
             fetch("https://socnetworkbackend.justcode.am/api/admin/create_forum", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    if(result.status) {
+                    if (result.status) {
                         setNewForum(new Date())
-                        setDescription('')
-                        // setCategoryId('')
+                        setOpen(false)
                     }
                 })
                 .catch(error => console.log('error', error));
@@ -52,12 +55,9 @@ const CreateForum = ({ open, setOpen, setNewForum }) => {
     }
 
     function handleImageChange(event) {
-
         Object.values(event.target.files).forEach(element => {
-            console.log(element);
             formdata.append("photo[]", element);
         })
-
     }
 
     function close() {
